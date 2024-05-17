@@ -3,7 +3,7 @@ Angular CLI yüklü olmalıdır. Yüklemek için aşağıdaki komutu kullanabili
 npm install -g @angular/cli
 
 Proje dizinine gidin ve bağımlılıkları yeniden yüklemek için npm install komutunu çalıştırın:
-cd baski_editoru\baski_editoru_app
+cd baski_editoru_app
 npm install
 
 Eğer yukarıdaki adım sorunu çözmezse, eksik olan paketi manuel olarak yükleyin:
@@ -12,7 +12,7 @@ npm install --save-dev @angular-devkit/build-angular
 ---
 
 2-Proje dizinine gidin:
-cd baski_editoru\baski_editoru_app
+cd baski_editoru_app
 
 ---
 
