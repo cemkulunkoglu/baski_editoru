@@ -1,0 +1,111 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+  <div class="row">
+    <div class="col-lg-8">
+      <div #gridContainer class="grid-container">
+        <div *ngFor="let item of items"
+          [ngStyle]="{ top: item.y + 'px', left: item.x + 'px', width: item.width + 'px', height: item.height + 'px' }"
+          class="draggable" (mousedown)="startDrag($event, item)">
+          <ng-container *ngIf="item.type === 'text'">
+            <div id="item-{{ item.id }}" (dblclick)="enableEditing(item)" (blur)="saveEditedContent(item)" [innerHTML]="item.content">
+            </div>
+          </ng-container>
+          <ng-container *ngIf="item.type === 'image'">
+            <img [src]="item.content" alt="image" [ngStyle]="{ width: item.width + 'px', height: item.height + 'px' }" />
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4" style="margin-top: 20px;">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="paperType">Baskı Boyutu</span>
+          <select class="form-select" formControlName="paperType">
+            <option value="A3">A3</option>
+            <option value="A4">A4</option>
+            <option value="A5">A5</option>
+            <option value="special">Özel</option>
+          </select>
+        </div>
+
+        <div *ngIf="form.get('paperType')?.value === 'special'">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="customWidth">Genişlik</span>
+                <input type="text" class="form-control" formControlName="customWidth" placeholder="Genişlik mm">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="customHeight">Yükseklik</span>
+                <input type="text" class="form-control" formControlName="customHeight" placeholder="Yükseklik mm">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="contentType">İçerik Türü</span>
+          <select class="form-select" formControlName="contentType">
+            <option value="text">Metin</option>
+            <option value="image">Görsel</option>
+          </select>
+        </div>
+
+        <div *ngIf="form.get('contentType')?.value === 'image'">
+          <div class="input-group mb-3">
+            <input type="file" accept="image/jpeg, image/png" class="form-control" id="fileName"
+              formControlName="fileName">
+          </div>
+        </div>
+
+        <div *ngIf="form.get('contentType')?.value === 'text'">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Alan Adı</span>
+            <input type="text" class="form-control" formControlName="fieldName" placeholder="Alan Adı"
+              aria-label="FieldName" aria-describedby="basic-addon1">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div *ngIf="form.get('contentType')?.value === 'text'">
+            <ckeditor [editor]="Editor" formControlName="textContent" [config]="editorConfig"></ckeditor>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-sm">Ekle</button>
+        </div>
+      </form>
+
+      <div class="alert alert-info mt-3" role="alert">
+        <h5>Koordinatlar:</h5>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="input-group mb-3">
+              <span class="input-group-text">X Koordinat</span>
+              <input type="text" class="form-control" [value]="currentX" readonly>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="input-group mb-3">
+              <span class="input-group-text">Y Koordinat</span>
+              <input type="text" class="form-control" [value]="currentY" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3" role="alert">
+        <h5>Kullanım Talimatları:</h5>
+        <ul>
+          <li>Bir öğe eklemek için, formu doldurun ve "Ekle" butonuna tıklayın.</li>
+          <li>Bir öğeyi sürüklemek için, öğeye tıklayın ve istediğiniz konuma taşıyın.</li>
+          <li>Bir öğeyi yeniden boyutlandırmak için, öğeye shift tuşuna basılı tutarak tıklayın ve köşelerden çekin.</li>
+          <li>Bir öğeyi silmek için, öğeyi seçin ve delete tuşuna basın.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

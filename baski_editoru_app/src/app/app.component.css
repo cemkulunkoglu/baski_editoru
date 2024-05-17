@@ -1,0 +1,55 @@
+::ng-deep .input-group-text,
+::ng-deep .form-control {
+  border-radius: 0 !important;
+}
+
+::ng-deep span {
+  width: 115px;
+}
+
+::ng-deep .grid-container {
+  position: relative;
+  width: 801px;
+  height: 801px;
+  background-image: linear-gradient(#ccc 1px, transparent 1px),
+    linear-gradient(90deg, #ccc 1px, transparent 1px);
+  background-size: 20px 20px;
+  margin: 20px;
+}
+
+::ng-deep .draggable {
+  position: absolute;
+  cursor: move;
+  border: 1px solid #000;
+}
+
+::ng-deep .resize-handle {
+  width: 10px;
+  height: 10px;
+  background-color: #000;
+  position: absolute;
+}
+
+::ng-deep .resize-handle.bottom-right {
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+}
+
+::ng-deep .resize-handle.bottom-left {
+  left: 0;
+  bottom: 0;
+  cursor: sw-resize;
+}
+
+::ng-deep .resize-handle.top-right {
+  right: 0;
+  top: 0;
+  cursor: ne-resize;
+}
+
+::ng-deep .resize-handle.top-left {
+  left: 0;
+  top: 0;
+  cursor: nw-resize;
+}
