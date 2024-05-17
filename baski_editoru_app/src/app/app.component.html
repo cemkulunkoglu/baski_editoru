@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>{{ title }} Cem </h1>
+  <h1>{{ title }}</h1>
   <div class="row">
     <div class="col-lg-8">
       <div #gridContainer class="grid-container">
@@ -7,11 +7,13 @@
           [ngStyle]="{ top: item.y + 'px', left: item.x + 'px', width: item.width + 'px', height: item.height + 'px' }"
           class="draggable" (mousedown)="startDrag($event, item)">
           <ng-container *ngIf="item.type === 'text'">
-            <div id="item-{{ item.id }}" (dblclick)="enableEditing(item)" (blur)="saveEditedContent(item)" [innerHTML]="item.content">
+            <div id="item-{{ item.id }}" (dblclick)="enableEditing(item)" (blur)="saveEditedContent(item)"
+              [innerHTML]="item.content">
             </div>
           </ng-container>
           <ng-container *ngIf="item.type === 'image'">
-            <img [src]="item.content" alt="image" [ngStyle]="{ width: item.width + 'px', height: item.height + 'px' }" />
+            <img [src]="item.content" alt="image"
+              [ngStyle]="{ width: item.width + 'px', height: item.height + 'px' }" />
           </ng-container>
         </div>
       </div>
@@ -102,7 +104,8 @@
         <ul>
           <li>Bir öğe eklemek için, formu doldurun ve "Ekle" butonuna tıklayın.</li>
           <li>Bir öğeyi sürüklemek için, öğeye tıklayın ve istediğiniz konuma taşıyın.</li>
-          <li>Bir öğeyi yeniden boyutlandırmak için, öğeye shift tuşuna basılı tutarak tıklayın ve köşelerden çekin.</li>
+          <li>Bir öğeyi yeniden boyutlandırmak için, öğeye shift tuşuna basılı tutarak tıklayın ve köşelerden çekin.
+          </li>
           <li>Bir öğeyi silmek için, öğeyi seçin ve delete tuşuna basın.</li>
         </ul>
       </div>
